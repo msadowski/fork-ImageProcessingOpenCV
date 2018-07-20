@@ -41,3 +41,23 @@ DllExport void convertToGray(unsigned char* data, int dataLen, ImageInfo & imInf
 	imInfo.data = (unsigned char *)calloc(imInfo.size, sizeof(unsigned char));
 	std::copy(bytes.begin(), bytes.end(), imInfo.data);
 }
+
+DllExport void firstAproximation(int* p1, int* p2, double &pan, double &tilt)
+{
+	pan = p1[0]*0.1+p1[1]*0.1;
+	tilt = p2[0]*0.1+p2[1]*0.1;
+	//TODO
+}
+
+DllExport void finalPTZParams(unsigned char* dataR, int dataRLen, unsigned char* dataP, int dataPLen, double &pan, double &tilt, int &zoom)
+{
+	vector<unsigned char> imgBytesR(dataR, dataR + dataRLen);
+	Mat imR = imdecode(imgBytesR, CV_LOAD_IMAGE_COLOR);
+	vector<unsigned char> imgBytesP(dataP, dataP + dataPLen);
+	Mat imP = imdecode(imgBytesP, CV_LOAD_IMAGE_COLOR);
+	
+	pan = 0.01;
+	tilt = 0.02;
+	zoom = 123;
+	//TODO
+}
